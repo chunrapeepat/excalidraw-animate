@@ -11,6 +11,7 @@ type AnimateOptions = {
   pointerImg?: string;
   pointerWidth?: string;
   pointerHeight?: string;
+  durationFactor?: number;
 };
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
@@ -645,11 +646,12 @@ export const animateSvg = (
   elements: readonly NonDeletedExcalidrawElement[],
   options: AnimateOptions = {},
 ) => {
+  const durationFactor = options.durationFactor ?? 1;
   const groups = createGroups(svg, elements);
   const finished = new Map();
   let current = options.startMs ?? 1000; // 1 sec margin
-  const groupDur = 5000;
-  const individualDur = 500;
+  const groupDur = 5000 * durationFactor;
+  const individualDur = 500 * durationFactor;
   const groupNodes = filterGroupNodes(svg.childNodes as NodeListOf<SVGElement>);
   if (groupNodes.length !== elements.length) {
     throw new Error('element length mismatch');
