@@ -649,7 +649,7 @@ export const animateSvg = (
   const durationFactor = options.durationFactor ?? 1;
   const groups = createGroups(svg, elements);
   const finished = new Map();
-  let current = options.startMs ?? 1000; // 1 sec margin
+  let current = options.startMs ?? 0;
   const groupDur = 5000 * durationFactor;
   const individualDur = 500 * durationFactor;
   const groupNodes = filterGroupNodes(svg.childNodes as NodeListOf<SVGElement>);
@@ -701,7 +701,7 @@ export const animateSvg = (
       }
     }
   });
-  const finishedMs = current + 1000; // 1 sec margin
+  const finishedMs = current;
   return { finishedMs };
 };
 
